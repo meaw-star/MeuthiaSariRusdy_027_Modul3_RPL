@@ -10,17 +10,21 @@ class BukuController:
         self.view = BukuView()
 
         # Menampilkan informasi role pada judul jendela aplikasi
-        self.view.title(f"Sistem Manajemen Perpustakaan - Mode: {self.user_role.upper()}")
+        self.view.title(
+            f"Sistem Manajemen Perpustakaan - Mode: {self.user_role.upper()}"
+        )
 
-        # Binding tombol simpan, update, dan delete
+        # Binding tombol simpan, update, delete, dan logout
         self.view.btn_simpan.configure(command=self.simpan_data)
         self.view.btn_update.configure(command=self.update_data)
         self.view.btn_delete.configure(command=self.hapus_data)
+        self.view.btn_logout.configure(command=self.logout)
 
         # Binding pemilihan baris tabel
         self.view.table.bind("<<TreeviewSelect>>", self.pilih_buku)
 
-        # OTORISASI: Jika bukan admin, nonaktifkan form input dan tombol
+        # TUGAS MEUTHIA MODUL 7 NOMOR 2: Menerapkan aturan otorisasi pada tombol Update dan Delete
+        # Jika pengguna bukan admin, tombol dan form akan dikunci
         if self.user_role != "admin":
             self.view.btn_simpan.configure(
                 state="disabled",
@@ -223,6 +227,17 @@ class BukuController:
                 "Error",
                 "Terjadi kesalahan saat menghapus data."
             )
+
+    # TUGAS MEUTHIA MODUL 7 NOMOR 3:
+    # Fungsi Logout untuk kembali ke halaman Login
+    def logout(self):
+        # Menutup jendela perpustakaan
+        self.view.destroy()
+
+        # Membuka kembali halaman Login
+        from controllers.auth_controller import AuthController
+        app_auth = AuthController()
+        app_auth.run()
 
     # Fungsi untuk menyalakan aplikasi
     def run(self):

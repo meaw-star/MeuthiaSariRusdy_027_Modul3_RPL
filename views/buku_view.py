@@ -1,3 +1,4 @@
+# Meuthia Sari Rusdy_F5212510027
 import customtkinter as ctk
 from tkinter import ttk
 
@@ -38,6 +39,14 @@ class BukuView(ctk.CTk):
         self.btn_delete = ctk.CTkButton(self.frame_kiri,text="Hapus Data (Delete)",fg_color="red")
         self.btn_delete.pack(pady=5, padx=15, fill="x")
 
+        # TUGAS MEUTHIA MODUL 7 NO 3: Tombol Logout
+        self.btn_logout = ctk.CTkButton(
+            self.frame_kiri,
+            text="Logout",
+            fg_color="gray"
+        )
+        self.btn_logout.pack(pady=10, padx=15, fill="x")
+
         # FRAME KANAN: TABEL DAFTAR BUKU
 
         self.frame_kanan = ctk.CTkFrame(self)
@@ -59,7 +68,7 @@ class BukuView(ctk.CTk):
         self.table.column("tahun", width=80, anchor="center")
 
         self.table.pack(fill="both", expand=True, padx=15, pady=10)
-        
+
 if __name__ == "__main__":
     app = BukuView()
     app.mainloop()
